@@ -50,7 +50,7 @@ vector<int> GRASP::run(const SetCoverQBF& scqbf) {
         if (value > bestValue) {
             bestValue = value;
             bestSolution = solution;
-            cout << "New best solution found at iteration " << iter
+            cout << "New best solution found at iteration " << (iter + 1)
                 << " with value: " << bestValue << endl;
         }
 

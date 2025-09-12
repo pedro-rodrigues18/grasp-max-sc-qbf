@@ -1,0 +1,6 @@
+Running instance: instance-04.txt
+STANDARD -> Value=604 Time=1800s Feasible=Yes
+STANDARD+ALPHA -> Value=604 Time=1800s Feasible=Yes
+STANDARD+BEST -> Value=604 Time=1802s Feasible=Yes
+STANDARD+HC1 -> Value=604 Time=1800s Feasible=Yes
+STANDARD+HC2 -> Value=604 Time=1800s Feasible=Yes
