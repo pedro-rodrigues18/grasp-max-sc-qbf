@@ -1,6 +1,6 @@
 Running instance: instance-03.txt
-STANDARD -> Value=283 Time=369s Feasible=Yes
-STANDARD+ALPHA -> Value=283 Time=388s Feasible=Yes
+STANDARD -> Value=283 Time=1140s Feasible=Yes
+STANDARD+ALPHA -> Value=283 Time=1161s Feasible=Yes
 STANDARD+BEST -> Value=283 Time=1800s Feasible=Yes
-STANDARD+HC1 -> Value=283 Time=356s Feasible=Yes
-STANDARD+HC2 -> Value=283 Time=374s Feasible=Yes
+STANDARD+HC1 -> Value=283 Time=1059s Feasible=Yes
+STANDARD+HC2 -> Value=283 Time=1098s Feasible=Yes

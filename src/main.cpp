@@ -68,26 +68,40 @@ void runInstance(const std::string& instPath, const std::string& instName) {
 
     std::string baseName = instName;
     size_t lastindex = baseName.find_last_of(".");
-    baseName = baseName.substr(0, lastindex);
-    std::ofstream log("logs/" + baseName + ".log");
-    log << "Running instance: " << instName << "\n";
+    if (lastindex != std::string::npos) {
+        baseName = baseName.substr(0, lastindex);
+    }
+
+    std::vector<std::future<ExperimentResult>> futures;
+    for (auto& [cfgName, cm, sm, alpha] : configs) {
+        futures.push_back(std::async(std::launch::async, [&, cfgName, cm, sm, alpha]() {
+            return runSingleConfig(instPath, instName, cfgName, cm, sm, alpha);
+        }));
+    }
 
     std::vector<ExperimentResult> local_results;
-    for (auto& [cfgName, cm, sm, alpha] : configs) {
-        auto r = runSingleConfig(instPath, instName, cfgName, cm, sm, alpha);
-        local_results.push_back(r);
-        log << cfgName << " -> Value=" << r.value
+    for (auto& f : futures) {
+        local_results.push_back(f.get());
+    }
+
+    std::ofstream log("logs/" + baseName + ".log");
+    log << "Running instance: " << instName << "\n";
+    for (auto& r : local_results) {
+        log << r.config << " -> Value=" << r.value
             << " Time=" << r.time_seconds << "s"
             << " Feasible=" << (r.feasible ? "Yes" : "No") << "\n";
     }
     log.close();
 
-    std::lock_guard<std::mutex> lock(results_mutex);
-    all_results.insert(all_results.end(), local_results.begin(), local_results.end());
+    {
+        std::lock_guard<std::mutex> lock(results_mutex);
+        all_results.insert(all_results.end(), local_results.begin(), local_results.end());
+    }
 }
 
 void runAllInstances(const std::vector<std::string>& instances) {
-    unsigned int num_threads = std::min(16u, std::max(1u, std::thread::hardware_concurrency()));
+    // unsigned int num_threads = std::min(16u, std::max(1u, std::thread::hardware_concurrency()));
+    unsigned int num_threads = std::max(1u, std::thread::hardware_concurrency());
     std::cout << "Using " << num_threads << " threads.\n";
 
     std::atomic<size_t> next(0);
