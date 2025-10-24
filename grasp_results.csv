@@ -1,16 +1,4 @@
 Instance,Configuration,Value,Time_Seconds,Feasible
-instance-11.txt,STANDARD+ALPHA,911.00,10,Yes
-instance-14.txt,STANDARD+ALPHA,360.00,10,Yes
-instance-13.txt,STANDARD+ALPHA,390.00,10,Yes
-instance-11.txt,STANDARD+ALPHA,951.00,10,Yes
-instance-14.txt,STANDARD+ALPHA,394.00,10,Yes
-instance-13.txt,STANDARD+ALPHA,402.00,10,Yes
-instance-11.txt,STANDARD+ALPHA,900.00,10,Yes
-instance-13.txt,STANDARD+ALPHA,267.00,10,Yes
-instance-14.txt,STANDARD+ALPHA,586.00,10,Yes
-instance-11.txt,STANDARD+ALPHA,907.00,10,Yes
-instance-13.txt,STANDARD+ALPHA,529.00,10,Yes
-instance-14.txt,STANDARD+ALPHA,305.00,10,Yes
 instance-11.txt,STANDARD+ALPHA,3132.00,600,Yes
 instance-13.txt,STANDARD+ALPHA,1435.00,600,Yes
 instance-14.txt,STANDARD+ALPHA,1427.00,602,Yes
