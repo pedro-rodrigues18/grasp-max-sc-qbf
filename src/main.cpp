@@ -26,8 +26,13 @@ struct ExperimentResult {
 std::vector<ExperimentResult> all_results;
 
 void writeResults(const std::string& filename) {
-    std::ofstream file(filename);
-    file << "Instance,Configuration,Value,Time_Seconds,Feasible\n";
+    bool file_exists = std::filesystem::exists(filename);
+    
+    std::ofstream file(filename, std::ios::app); // append
+    if (!file_exists) {
+        file << "Instance,Configuration,Value,Time_Seconds,Feasible\n";
+    }
+
     for (const auto& r : all_results) {
         file << r.instance << "," << r.config << ","
              << std::fixed << std::setprecision(2) << r.value << ","
@@ -42,7 +47,7 @@ ExperimentResult runSingleConfig(const std::string& instPath, const std::string&
     ExperimentResult r{instName, cfgName, -1, -1, false};
     try {
         SetCoverQBF scqbf(instPath);
-        GRASP grasp(alpha, 10000, 1800, cm, sm);
+        GRASP grasp(alpha, 10000, 600, cm, sm); // 10 minutes time limit
 
         auto start = std::chrono::high_resolution_clock::now();
         auto sol = grasp.run(scqbf);
@@ -57,13 +62,12 @@ ExperimentResult runSingleConfig(const std::string& instPath, const std::string&
     return r;
 }
 
+#include <chrono>
+#include <iomanip>
+
 void runInstance(const std::string& instPath, const std::string& instName) {
     std::vector<std::tuple<std::string, GRASP::ConstructionMethod, GRASP::SearchMethod, double>> configs = {
-        {"STANDARD", GRASP::STANDARD, GRASP::FIRST_IMPROVING, 0.1},
-        {"STANDARD+ALPHA", GRASP::STANDARD, GRASP::FIRST_IMPROVING, 0.3},
-        {"STANDARD+BEST", GRASP::STANDARD, GRASP::BEST_IMPROVING, 0.1},
-        {"STANDARD+HC1", GRASP::RANDOM_PLUS_GREEDY, GRASP::FIRST_IMPROVING, 0.1},
-        {"STANDARD+HC2", GRASP::SAMPLED_GREEDY, GRASP::FIRST_IMPROVING, 0.1}
+        {"STANDARD+ALPHA", GRASP::STANDARD, GRASP::FIRST_IMPROVING, 0.3}
     };
 
     std::string baseName = instName;
@@ -84,13 +88,22 @@ void runInstance(const std::string& instPath, const std::string& instName) {
         local_results.push_back(f.get());
     }
 
-    std::ofstream log("logs/" + baseName + ".log");
+    // Abrir em modo append para não sobrescrever
+    std::ofstream log("logs/" + baseName + ".log", std::ios::app);
+
+    // Adicionar timestamp para diferenciar execuções
+    auto now = std::chrono::system_clock::now();
+    auto time_t_now = std::chrono::system_clock::to_time_t(now);
+    log << "=== Execution at " << std::put_time(std::localtime(&time_t_now), "%Y-%m-%d %H:%M:%S") << " ===\n";
+
     log << "Running instance: " << instName << "\n";
     for (auto& r : local_results) {
         log << r.config << " -> Value=" << r.value
             << " Time=" << r.time_seconds << "s"
             << " Feasible=" << (r.feasible ? "Yes" : "No") << "\n";
     }
+    log << "\n";
+
     log.close();
 
     {
@@ -98,6 +111,7 @@ void runInstance(const std::string& instPath, const std::string& instName) {
         all_results.insert(all_results.end(), local_results.begin(), local_results.end());
     }
 }
+
 
 void runAllInstances(const std::vector<std::string>& instances) {
     // unsigned int num_threads = std::min(16u, std::max(1u, std::thread::hardware_concurrency()));

@@ -20,7 +20,6 @@ GRASP::GRASP(double alpha, int maxIter, int timeLimit, ConstructionMethod cm, Se
 }
 
 vector<int> GRASP::run(const SetCoverQBF& scqbf) {
-    // cout << "Iniciando GRASP para MAX-SC-QBF..." << endl;
     cout << "Starting GRASP for MAX-SC-QBF..." << endl;
     cout << "Parameters: alpha=" << alpha << ", maxIter=" << maxIterations << endl;
 
@@ -29,29 +28,32 @@ vector<int> GRASP::run(const SetCoverQBF& scqbf) {
 
     auto startTime = chrono::high_resolution_clock::now();
 
-    for (int iter = 0; iter < maxIterations; iter++) {
-        auto currentTime = chrono::high_resolution_clock::now();
-        auto elapsed = chrono::duration_cast<chrono::seconds>(currentTime - startTime).count();
+    for (int iter = 0; iter < maxIterations; ++iter) {
+        auto elapsed = chrono::duration_cast<chrono::seconds>(
+            chrono::high_resolution_clock::now() - startTime).count();
         if (elapsed >= timeLimit) {
             cout << "Time limit reached!" << endl;
             break;
         }
 
         // Construction Phase
-        vector<int> solution = constructSolution(scqbf);
+        vector<int> solution = constructSolution(scqbf, startTime);
+
+        // Reparo para garantir factibilidade
+        solution = repairSolution(scqbf, solution);
 
         // Local Search Phase
-        solution = localSearch(scqbf, solution);
+        solution = localSearch(scqbf, solution, startTime);
 
-        // Evaluate solution
+        // Avaliar solução
         double value = scqbf.evaluateSolution(solution);
 
-        // Update best solution
+        // Atualizar melhor solução
         if (value > bestValue) {
             bestValue = value;
             bestSolution = solution;
             cout << "New best solution found at iteration " << (iter + 1)
-                << " with value: " << bestValue << endl;
+                 << " with value: " << bestValue << endl;
         }
 
         if ((iter + 1) % 100 == 0) {
@@ -60,28 +62,69 @@ vector<int> GRASP::run(const SetCoverQBF& scqbf) {
     }
 
     cout << "GRASP finished. Best value found: " << bestValue << endl;
-
     return bestSolution;
 }
 
-vector<int> GRASP::constructSolution(const SetCoverQBF& scqbf) {
+
+vector<int> GRASP::repairSolution(const SetCoverQBF& scqbf, vector<int> solution) const {
+    set<int> uncoveredElements = scqbf.getUniverse();
+    // Remove elementos já cobertos
+    for (int i = 0; i < static_cast<int>(solution.size()); ++i) {
+        if (solution[i] == 1) {
+            const vector<int>& setElements = scqbf.getSet(i);
+            for (int e : setElements)
+                uncoveredElements.erase(e);
+        }
+    }
+
+    while (!uncoveredElements.empty()) {
+        int bestCandidate = -1;
+        int bestCover = -1;
+        for (int i = 0; i < static_cast<int>(solution.size()); ++i) {
+            if (solution[i] == 1) continue;
+            int cover = 0;
+            for (int e : scqbf.getSet(i))
+                if (uncoveredElements.count(e)) ++cover;
+            if (cover > bestCover) {
+                bestCover = cover;
+                bestCandidate = i;
+            }
+        }
+        if (bestCandidate == -1) break; // Nenhum conjunto pode cobrir os restantes (raro)
+        solution[bestCandidate] = 1;
+        for (int e : scqbf.getSet(bestCandidate))
+            uncoveredElements.erase(e);
+    }
+
+    return solution;
+}
+
+
+vector<int> GRASP::constructSolution(const SetCoverQBF& scqbf, const chrono::high_resolution_clock::time_point& startTime) {
     switch (constructionMethod) {
     case RANDOM_PLUS_GREEDY:
         return constructRandomPlusGreedy(scqbf);
     case SAMPLED_GREEDY:
         return constructSampledGreedy(scqbf);
     default:
-        return constructStandard(scqbf);
+        return constructStandard(scqbf, startTime);
     }
 }
 
-vector<int> GRASP::constructStandard(const SetCoverQBF& scqbf) {
+vector<int> GRASP::constructStandard(const SetCoverQBF& scqbf, const chrono::high_resolution_clock::time_point& startTime) {
     int n = scqbf.getNumSets();
     vector<int> solution(n, 0);
     set<int> uncoveredElements = scqbf.getUniverse();
     vector<bool> candidateSet(n, true);
 
     while (!uncoveredElements.empty()) {
+        auto elapsed = chrono::duration_cast<chrono::seconds>(
+            chrono::high_resolution_clock::now() - startTime).count();
+        if (elapsed >= timeLimit) {
+            cout << "Time limit reached during construction phase." << endl;
+            // return {};
+        }
+
         vector<pair<double, int>> candidateBenefits;
 
         for (int i = 0; i < n; i++) {
@@ -254,21 +297,28 @@ void GRASP::updateUncoveredElements(const SetCoverQBF& scqbf, int selectedSet,
     }
 }
 
-vector<int> GRASP::localSearch(const SetCoverQBF& scqbf, vector<int> solution) const {
+vector<int> GRASP::localSearch(const SetCoverQBF& scqbf, vector<int> solution, const chrono::high_resolution_clock::time_point& startTime) const {
     switch (searchMethod) {
     case BEST_IMPROVING:
         return localSearchBestImproving(scqbf, solution);
     default:
-        return localSearchFirstImproving(scqbf, solution);
+        return localSearchFirstImproving(scqbf, solution, startTime);
     }
 }
 
-vector<int> GRASP::localSearchFirstImproving(const SetCoverQBF& scqbf, vector<int> solution) const {
+vector<int> GRASP::localSearchFirstImproving(const SetCoverQBF& scqbf, vector<int> solution, const chrono::high_resolution_clock::time_point& startTime) const {
     bool improved = true;
     double currentValue = scqbf.evaluateSolution(solution);
 
     while (improved) {
         improved = false;
+        auto elapsed = chrono::duration_cast<chrono::seconds>(
+            chrono::high_resolution_clock::now() - startTime).count();
+        if (elapsed >= timeLimit) {
+            cout << "Time limit reached during the local search phase." << endl;
+            return solution; // Retorna a solução atual, mesmo que incompleta
+        }
+
 
         // Operator 1: Flip (toggle 0->1 or 1->0)
         for (int i = 0; i < static_cast<int>(solution.size()); i++) {

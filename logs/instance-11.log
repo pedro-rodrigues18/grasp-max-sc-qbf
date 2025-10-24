@@ -1,6 +1,200 @@
+=== Execution at 2025-10-24 03:18:28 ===
 Running instance: instance-11.txt
-STANDARD -> Value=4718 Time=2053s Feasible=Yes
-STANDARD+ALPHA -> Value=4746 Time=2010s Feasible=Yes
-STANDARD+BEST -> Value=4585 Time=6478s Feasible=Yes
-STANDARD+HC1 -> Value=4744 Time=1898s Feasible=Yes
-STANDARD+HC2 -> Value=4705 Time=2048s Feasible=Yes
+STANDARD+ALPHA -> Value=2878 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3495 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3321 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3402 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3262 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3032 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:28 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3385 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3132 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2861 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2919 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3076 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3021 Time=600s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3097 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2903 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3140 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3318 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3265 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:29 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3442 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3249 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3599 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2704 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2827 Time=601s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2782 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3378 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2848 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3380 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3251 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2542 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2971 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:30 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3208 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2896 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2876 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3017 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3237 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2778 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3004 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2803 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3859 Time=602s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3077 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2727 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3360 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3269 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3259 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3083 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:31 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3541 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:32 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3074 Time=604s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:32 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3033 Time=604s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:32 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3091 Time=603s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:32 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=2983 Time=604s Feasible=Yes
+
+=== Execution at 2025-10-24 03:18:32 ===
+Running instance: instance-11.txt
+STANDARD+ALPHA -> Value=3476 Time=603s Feasible=Yes
+

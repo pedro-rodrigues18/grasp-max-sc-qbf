@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <set>
+#include <chrono>
 
 using namespace std;
 
@@ -50,18 +51,19 @@ public:
     SearchMethod getSearchMethod() const { return searchMethod; }
 
 private:
-    vector<int> constructSolution(const SetCoverQBF& scqbf);
-    vector<int> constructStandard(const SetCoverQBF& scqbf);
+    vector<int> constructSolution(const SetCoverQBF& scqbf, const chrono::high_resolution_clock::time_point& startTime);
+    vector<int> constructStandard(const SetCoverQBF& scqbf, const chrono::high_resolution_clock::time_point& startTime);
     vector<int> constructRandomPlusGreedy(const SetCoverQBF& scqbf);
     vector<int> constructSampledGreedy(const SetCoverQBF& scqbf);
+    vector<int> repairSolution(const SetCoverQBF& scqbf, vector<int> solution) const;
 
     double calculateBenefit(const SetCoverQBF& scqbf, const vector<int>& currentSolution,
         int candidate, const set<int>& uncoveredElements) const;
     vector<int> buildRCL(const vector<pair<double, int>>& candidateBenefits) const;
     void updateUncoveredElements(const SetCoverQBF& scqbf, int selectedSet,
         set<int>& uncoveredElements) const;
-    vector<int> localSearch(const SetCoverQBF& scqbf, vector<int> solution) const;
-    vector<int> localSearchFirstImproving(const SetCoverQBF& scqbf, vector<int> solution) const;
+    vector<int> localSearch(const SetCoverQBF& scqbf, vector<int> solution, const chrono::high_resolution_clock::time_point& startTime) const;
+    vector<int> localSearchFirstImproving(const SetCoverQBF& scqbf, vector<int> solution, const chrono::high_resolution_clock::time_point& startTime) const;
     vector<int> localSearchBestImproving(const SetCoverQBF& scqbf, vector<int> solution) const;
 };
 
